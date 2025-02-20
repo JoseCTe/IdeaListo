@@ -52,7 +52,6 @@ dependencies {
 
     // Dependency Injector
     implementation(libs.hilt.android)
-    implementation(libs.androidx.browser)
     ksp(libs.hilt.compiler)
 
     // Coroutines
@@ -72,6 +71,9 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.viewbinding)
     implementation(libs.compose.animation.graphics)
+
+    // Coil
+    implementation(libs.coil)
 
     // Compose Others
     implementation(libs.compose.activity)

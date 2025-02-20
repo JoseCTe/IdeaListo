@@ -1,4 +1,4 @@
-package com.baeolian.idealisto.view.screen.components
+package com.baeolian.idealisto.view.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

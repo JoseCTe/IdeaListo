@@ -43,4 +43,4 @@ object NetworkModule {
     }
 }
 
-internal const val BASE_URL = "https://idealista.github.io/android-challenge"
+internal const val BASE_URL = "https://idealista.github.io/android-challenge/"

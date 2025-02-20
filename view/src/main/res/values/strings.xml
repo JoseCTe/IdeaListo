@@ -1,3 +1,4 @@
 <resources>
-
+    <string name="property_size">%s m²</string>
+    <string name="property_rooms">%s habitaciones</string>
 </resources>

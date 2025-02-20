@@ -16,7 +16,7 @@ compose = "1.7.8"
 material3 = "1.3.1"
 navigationCompose = "2.8.7"
 navigationHilt = "1.2.0"
-browser = "1.8.0"
+coil = "2.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,7 +46,7 @@ compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
 compose-ui-viewbinding = { group = "androidx.compose.ui", name = "ui-viewbinding", version.ref = "compose" }
 compose-animation-graphics = { group = "androidx.compose.animation", name = "animation-graphics", version.ref = "compose" }
-androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
