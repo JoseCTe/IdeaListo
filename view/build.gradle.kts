@@ -1,9 +1,8 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -37,8 +36,8 @@ android {
         compose = true
     }
 
-    hilt {
-        enableAggregatingTask = false
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.12"
     }
 }
 
@@ -47,20 +46,36 @@ dependencies {
 
     // Android Base
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
-
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.viewmodel)
 
     // Dependency Injector
-    ksp(libs.hilt.compiler)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.browser)
+    ksp(libs.hilt.compiler)
 
-    // Lifecycle Viewmodel
-    implementation(libs.androidx.viewmodel)
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    // Compose Base
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.util)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    // Compose Previews
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.animation.graphics)
+
+    // Compose Others
+    implementation(libs.compose.activity)
+    implementation(libs.compose.viewmodel)
+    implementation(libs.navigation.compose)
+    implementation(libs.navigation.hilt)
 }

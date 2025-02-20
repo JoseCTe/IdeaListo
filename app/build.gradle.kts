@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -34,10 +34,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
-    }
-
-    hilt {
-        enableAggregatingTask = false
     }
 }
 

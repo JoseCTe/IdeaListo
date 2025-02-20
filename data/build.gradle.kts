@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -31,21 +31,24 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    hilt {
-        enableAggregatingTask = false
-    }
 }
 
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-
     // Dependency Injector
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    // Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
+    ksp(libs.moshi.codegen)
+    implementation(libs.moshi)
 
     // Data Persistence: Preferences
     implementation(libs.datastore.preferences)
