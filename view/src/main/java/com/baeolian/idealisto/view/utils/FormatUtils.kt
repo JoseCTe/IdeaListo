@@ -1,5 +1,6 @@
 package com.baeolian.idealisto.view.utils
 
+import com.baeolian.idealisto.view.R
 import java.text.DecimalFormat
 
 fun Int.toEuroFormat(): String? {
@@ -9,4 +10,21 @@ fun Int.toEuroFormat(): String? {
     } catch (e: Exception) {
         null
     }
+}
+
+fun String.toCountryFormat(): Country? {
+    return when (this) {
+        Country.Spain.countryCode -> Country.Spain
+        else -> null
+    }
+}
+
+fun Country.toResourceFormat(): Int {
+    return when (this) {
+        Country.Spain -> R.string.country_spain
+    }
+}
+
+enum class Country(val countryCode: String) {
+    Spain("es")
 }

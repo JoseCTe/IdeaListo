@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -19,7 +18,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -28,8 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -37,6 +33,8 @@ import com.baeolian.idealisto.view.R
 import com.baeolian.idealisto.view.data.PropertyViewData
 import com.baeolian.idealisto.view.utils.CustomAsyncImage
 import com.baeolian.idealisto.view.utils.advancedShadow
+import com.baeolian.idealisto.view.utils.allOrNull
+import com.baeolian.idealisto.view.utils.toResourceFormat
 
 @Composable
 fun PropertyCard(
@@ -106,26 +104,9 @@ fun PropertyCard(
             }
 
             FavoriteIcon(
-                isFavorite = property.isFavorite,
+                dateOfFavorite = property.dateOfFavorite,
                 onFavoriteClicked = { onFavoriteClicked(property.propertyCode) }
             )
-
-            /*Icon(
-                painter = painterResource(R.drawable.ic_love),
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(8.dp)
-                    .clip(CircleShape)
-                    .clickable { onFavoriteClicked(property.propertyCode) }
-                    .advancedShadow()
-                    .padding(8.dp),
-                contentDescription = "Favorite Icon",
-                tint = if (property.isFavorite) {
-                    Color.Red
-                } else {
-                    Color.White
-                }
-            )*/
         }
 
         Column(
@@ -143,9 +124,12 @@ fun PropertyCard(
                 )
             }
 
-            property.municipality?.let {
+            allOrNull(
+                property.municipality,
+                property.country?.toResourceFormat()
+            ) { municipality, country ->
                 Text(
-                    text = it,
+                    text = "$municipality, ${stringResource(country)}",
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodySmall,
@@ -206,45 +190,6 @@ private fun PropertyCardVerticalDivider() {
         modifier = Modifier.padding(horizontal = 12.dp),
         color = MaterialTheme.colorScheme.outlineVariant
     )
-}
-
-@Composable
-private fun BoxScope.FavoriteIcon(
-    isFavorite: Boolean,
-    onFavoriteClicked: () -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .align(Alignment.TopEnd)
-            .padding(8.dp)
-            .clip(CircleShape)
-            .advancedShadow()
-            .clickable { onFavoriteClicked() }
-    ) {
-        Icon(
-            painter = painterResource(R.drawable.ic_love),
-            modifier = Modifier
-                .size(42.dp)
-                .align(Alignment.Center)
-                .padding(8.dp),
-            contentDescription = "Favorite Icon Contour",
-            tint = Color.White
-        )
-
-        Icon(
-            painter = painterResource(R.drawable.ic_love),
-            modifier = Modifier
-                .size(40.dp)
-                .align(Alignment.Center)
-                .padding(8.dp),
-            contentDescription = "Favorite Icon",
-            tint = if (isFavorite) {
-                Color.Red
-            } else {
-                Color.White
-            }
-        )
-    }
 }
 
 private const val MAX_IMAGES_TO_LOAD = 8

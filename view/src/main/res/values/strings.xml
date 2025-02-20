@@ -1,4 +1,8 @@
 <resources>
     <string name="property_size">%s m²</string>
     <string name="property_rooms">%s habitaciones</string>
+    <string name="loading">Loading properties</string>
+    <string name="country_spain">España</string>
+    <string name="date_time_at">a las</string>
+    <string name="date_time_format">dd MMM yyyy \'%s\' HH:mm</string>
 </resources>

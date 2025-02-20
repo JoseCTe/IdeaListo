@@ -6,12 +6,14 @@ import com.baeolian.idealisto.domain.usecase.GetPropertyListUseCase
 import com.baeolian.idealisto.view.data.PropertyViewData
 import com.baeolian.idealisto.view.mapper.PropertyMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,13 +31,14 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getPropertyListUseCase().onSuccess { propertyList ->
                 _state.update { current ->
-                    current.copy(
-                        isLoading = false,
-                        properties = propertyList.map { PropertyMapper.map(it) }
-                    )
+                    current.copy(properties = propertyList.map { PropertyMapper.map(it) })
                 }
-            }.onFailure {
-                // TODO: Handle error
+
+                delay(INITIAL_ANIMATION_DELAY)
+
+                _state.update { current ->
+                    current.copy(isLoading = false)
+                }
             }
         }
     }
@@ -53,7 +56,11 @@ class HomeViewModel @Inject constructor(
             current.copy(
                 properties = current.properties.map { property ->
                     if (property.propertyCode == propertyId) {
-                        property.copy(isFavorite = !property.isFavorite)
+                        if (property.dateOfFavorite != null) {
+                            property.copy(dateOfFavorite = null)
+                        } else {
+                            property.copy(dateOfFavorite = Date())
+                        }
                     } else {
                         property
                     }
@@ -73,3 +80,5 @@ sealed class HomeEvent {
         val propertyId: String
     ) : HomeEvent()
 }
+
+private const val INITIAL_ANIMATION_DELAY = 2000L
