@@ -34,7 +34,7 @@ import com.baeolian.idealisto.view.data.PropertyViewData
 import com.baeolian.idealisto.view.utils.CustomAsyncImage
 import com.baeolian.idealisto.view.utils.advancedShadow
 import com.baeolian.idealisto.view.utils.allOrNull
-import com.baeolian.idealisto.view.utils.toResourceFormat
+import com.baeolian.idealisto.view.utils.countryToResourceFormat
 
 @Composable
 fun PropertyCard(
@@ -126,7 +126,7 @@ fun PropertyCard(
 
             allOrNull(
                 property.municipality,
-                property.country?.toResourceFormat()
+                property.country?.countryToResourceFormat()
             ) { municipality, country ->
                 Text(
                     text = "$municipality, ${stringResource(country)}",

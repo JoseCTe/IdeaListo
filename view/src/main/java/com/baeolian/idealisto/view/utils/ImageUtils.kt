@@ -1,5 +1,9 @@
 package com.baeolian.idealisto.view.utils
 
+import android.content.Context
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +20,9 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.viewpager.widget.PagerAdapter
 import coil.compose.AsyncImage
+import coil.load
 
 @Composable
 fun CustomAsyncImage(
@@ -48,5 +54,36 @@ fun CustomAsyncImage(
         ) {
             CircularProgressIndicator(modifier = Modifier.size(24.dp))
         }
+    }
+}
+
+class ImagePagerAdapter(
+    private val context: Context,
+    private val images: List<String>
+) : PagerAdapter() {
+
+    override fun getCount(): Int = images.size
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view == `object`
+    }
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val imageView = ImageView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            scaleType = ImageView.ScaleType.CENTER_CROP
+        }
+
+        imageView.load(images[position])
+        container.addView(imageView)
+
+        return imageView
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
     }
 }

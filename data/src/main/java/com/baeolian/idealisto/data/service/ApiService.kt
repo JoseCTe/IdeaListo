@@ -9,6 +9,6 @@ interface ApiService {
     @GET("list.json")
     suspend fun getPropertyList(): List<PropertyEntity>
 
-    @GET("details.json")
+    @GET("detail.json")
     suspend fun getPropertyDetails(): PropertyDetailsEntity
 }

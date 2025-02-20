@@ -1,8 +1,24 @@
 <resources>
     <string name="property_size">%s m²</string>
     <string name="property_rooms">%s habitaciones</string>
-    <string name="loading">Loading properties</string>
+    <string name="loading_properties">Cargando\npropiedades</string>
+    <string name="loading_details">Cargando detalles\nde la propiedad</string>
     <string name="country_spain">España</string>
     <string name="date_time_at">a las</string>
     <string name="date_time_format">dd MMM yyyy \'%s\' HH:mm</string>
+    <string name="property_details_title">Detalles de la propiedad</string>
+    <string name="property_details_price">Precio</string>
+    <string name="property_details_floor">Planta</string>
+    <string name="property_details_rooms">Habitaciones</string>
+    <string name="property_details_area">Área</string>
+    <string name="property_details_energy">Cert. Energético</string>
+    <string name="property_details_description">Descripción</string>
+    <string name="property_details_read_more">Leer más</string>
+    <string name="property_details_show_less">Mostrar menos</string>
+    <string name="global_back_arrow_description">Flecha hacia atrás</string>
+    <string name="property_details_status">Estado</string>
+    <string name="property_details_baths">Baños</string>
+    <string name="properties">Listado de propiedades</string>
+    <string name="carousel_images_description">Images Carousel</string>
+    <string name="property_details_component_description">Property Details Text</string>
 </resources>

@@ -19,7 +19,7 @@ fun String.toCountryFormat(): Country? {
     }
 }
 
-fun Country.toResourceFormat(): Int {
+fun Country.countryToResourceFormat(): Int {
     return when (this) {
         Country.Spain -> R.string.country_spain
     }

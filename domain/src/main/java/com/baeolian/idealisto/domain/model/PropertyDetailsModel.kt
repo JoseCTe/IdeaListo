@@ -3,7 +3,7 @@ package com.baeolian.idealisto.domain.model
 data class PropertyDetailsModel(
     val adid: Int,
     val price: Double?,
-    val priceInfo: PriceInfoModel?,
+    val priceInfo: PriceModel?,
     val operation: String?,
     val propertyType: String?,
     val extendedPropertyType: String?,
@@ -31,7 +31,7 @@ data class MoreCharacteristicsModel(
     val agencyIsABank: Boolean?,
     val energyCertificationType: String?,
     val flatLocation: String?,
-    val modificationDate: Int?,
+    val modificationDate: Long?,
     val constructedArea: Int?,
     val lift: Boolean?,
     val boxroom: Boolean?,

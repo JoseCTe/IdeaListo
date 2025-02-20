@@ -13,7 +13,7 @@ import com.squareup.moshi.JsonClass
 data class PropertyDetailsEntity(
     @Json(name = "adid") val adid: Int,
     @Json(name = "price") val price: Double?,
-    @Json(name = "priceInfo") val priceInfo: PriceInfoEntity?,
+    @Json(name = "priceInfo") val priceInfo: PriceEntity?,
     @Json(name = "operation") val operation: String?,
     @Json(name = "propertyType") val propertyType: String?,
     @Json(name = "extendedPropertyType") val extendedPropertyType: String?,
@@ -65,7 +65,7 @@ data class MoreCharacteristicsEntity(
     @Json(name = "agencyIsABank") val agencyIsABank: Boolean?,
     @Json(name = "energyCertificationType") val energyCertificationType: String?,
     @Json(name = "flatLocation") val flatLocation: String?,
-    @Json(name = "modificationDate") val modificationDate: Int?,
+    @Json(name = "modificationDate") val modificationDate: Long?,
     @Json(name = "constructedArea") val constructedArea: Int?,
     @Json(name = "lift") val lift: Boolean?,
     @Json(name = "boxroom") val boxroom: Boolean?,
