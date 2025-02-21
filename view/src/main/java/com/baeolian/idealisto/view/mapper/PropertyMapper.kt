@@ -4,6 +4,7 @@ import com.baeolian.idealisto.domain.model.PropertyModel
 import com.baeolian.idealisto.view.data.PropertyViewData
 import com.baeolian.idealisto.view.utils.toCountryFormat
 import com.baeolian.idealisto.view.utils.toEuroFormat
+import java.util.Date
 
 object PropertyMapper {
 

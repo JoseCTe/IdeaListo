@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -83,9 +84,7 @@ private fun HomeContent(
             )
         }
 
-        items(state.properties.size) { index ->
-            val property = state.properties[index]
-
+        items(state.properties) { property ->
             PropertyCard(
                 modifier = Modifier.padding(vertical = 16.dp),
                 property = property,

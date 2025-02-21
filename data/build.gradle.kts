@@ -52,4 +52,5 @@ dependencies {
 
     // Data Persistence: Preferences
     implementation(libs.datastore.preferences)
+    implementation(libs.gson)
 }

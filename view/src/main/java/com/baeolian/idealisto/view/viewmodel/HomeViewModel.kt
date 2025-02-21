@@ -2,6 +2,9 @@ package com.baeolian.idealisto.view.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.baeolian.idealisto.domain.usecase.AddFavoriteUseCase
+import com.baeolian.idealisto.domain.usecase.DeleteFavoriteUseCase
+import com.baeolian.idealisto.domain.usecase.GetFavoritesUseCase
 import com.baeolian.idealisto.domain.usecase.GetPropertyListUseCase
 import com.baeolian.idealisto.view.data.PropertyViewData
 import com.baeolian.idealisto.view.mapper.PropertyMapper
@@ -19,6 +22,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPropertyListUseCase: GetPropertyListUseCase,
+    private val getFavoritesUseCase: GetFavoritesUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
@@ -31,13 +37,22 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getPropertyListUseCase().onSuccess { propertyList ->
                 _state.update { current ->
-                    current.copy(properties = propertyList.map { PropertyMapper.map(it) })
+                    current.copy(
+                        properties = propertyList.map { PropertyMapper.map(it) }
+                    )
                 }
 
                 delay(INITIAL_ANIMATION_DELAY)
 
-                _state.update { current ->
-                    current.copy(isLoading = false)
+                getFavoritesUseCase().collect { favorites ->
+                    _state.update { current ->
+                        current.copy(
+                            isLoading = false,
+                            properties = current.properties.map {
+                                it.copy(dateOfFavorite = favorites[it.propertyCode])
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -50,22 +65,10 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onFavoriteClicked(propertyId: String) {
-        // TODO: Add/remove favorite (data persistence)
-
-        _state.update { current ->
-            current.copy(
-                properties = current.properties.map { property ->
-                    if (property.propertyCode == propertyId) {
-                        if (property.dateOfFavorite != null) {
-                            property.copy(dateOfFavorite = null)
-                        } else {
-                            property.copy(dateOfFavorite = Date())
-                        }
-                    } else {
-                        property
-                    }
-                }
-            )
+        if (state.value.properties.find { it.propertyCode == propertyId }?.dateOfFavorite != null) {
+            deleteFavoriteUseCase(propertyId)
+        } else {
+            addFavoriteUseCase(propertyId, Date())
         }
     }
 }
